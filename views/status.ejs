@@ -1,0 +1,55 @@
+<h1>Status Check</h1>
+
+<form action = "/getStatus" method="post" name = "checkform">
+    <input type = "text" name = "check" placeholder = "Enter String" required>
+    <br><br>
+<button type = "Submit" onclick="checkProposalStatus()">Submit</button>
+</form>
+
+<div id="status"></div>
+
+<script>
+    async function checkProposalStatus() {
+        const checkstring = document.getElementById('checkstring').value;
+
+        // Make a fetch request to your server to get the status
+        const response = await fetch(`/getStatus?checkstring=${checkstring}`);
+        const data = await response.json();
+
+        // Display the status on the page
+        document.getElementById('status').innerHTML = `<p>Status: ${data.status}</p>`;
+    }
+</script>
+
+
+<!-- <h1>Status Check</h1>
+
+<form action="/getStatus" method="post" name="checkform" onsubmit="checkProposalStatus(event)">
+    <input type="text" id="checkstring" name="check" placeholder="Enter String" required>
+    <br><br>
+    <button type="submit">Submit</button>
+</form>
+
+<div id="status"></div>
+
+<script>
+    async function checkProposalStatus(event) {
+        event.preventDefault(); // Prevent the form from submitting traditionally
+
+        const checkstring = document.getElementById('checkstring').value;
+
+        // Make a fetch request to your server to get the status
+        const response = await fetch('/getStatus', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ check: checkstring }),
+        });
+
+        const data = await response.json();
+
+        // Display the status on the page
+        document.getElementById('status').innerHTML = `<p>Status: ${data.status}</p>`;
+    }
+</script> -->
